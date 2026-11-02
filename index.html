@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production Client-Side Vocal and Synthetic Speech Detection Engine v2.1.0">
+  <title>Vocal & Synthetic Speech Classifier v2.1.0</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-cluster">
+      <svg class="brand-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" x2="12" y1="19" y2="22"></line>
+      </svg>
+      <h1 class="brand-title">Vocal Classifier <span class="semver-tag">v2.1.0</span></h1>
+    </div>
+
+    <div class="controls-cluster">
+      <!-- Neural ML VAD Toggle (DISABLED BY DEFAULT) -->
+      <div class="control-group">
+        <label for="toggle-ml" class="control-label">Neural ML VAD</label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-ml" aria-label="Toggle Neural Machine Learning VAD">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Theme Switcher (LIGHT MODE BY DEFAULT) -->
+      <div class="control-group">
+        <label for="toggle-theme" class="control-label">Dark Theme</label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-theme" aria-label="Toggle Dark Mode Theme">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <button id="btn-audio-init" class="btn btn-primary" type="button">Initialize DSP</button>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <aside class="telemetry-panel" aria-label="Acoustic Telemetry Summary">
+      <div class="card card-kpi">
+        <h2 class="card-title">System Status</h2>
+        <div class="kpi-row">
+          <span class="kpi-label">DSP Engine</span>
+          <span id="metric-engine" class="badge badge-inactive" aria-live="polite">OFFLINE</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Classification</span>
+          <span id="metric-class" class="kpi-value kpi-highlight" aria-live="polite">--</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">ML VAD Confidence</span>
+          <span id="metric-ml-prob" class="kpi-value" aria-live="polite">DISABLED</span>
+        </div>
+      </div>
+
+      <div class="card card-kpi">
+        <h2 class="card-title">Acoustic Features</h2>
+        <div class="kpi-row">
+          <span class="kpi-label">Signal Level</span>
+          <span id="metric-rms" class="kpi-value" aria-live="polite">-inf dBFS</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Zero-Crossing Rate</span>
+          <span id="metric-zcr" class="kpi-value" aria-live="polite">0.0000</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Spectral Flatness</span>
+          <span id="metric-sfm" class="kpi-value" aria-live="polite">0.0000</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Spectral Tilt</span>
+          <span id="metric-tilt" class="kpi-value" aria-live="polite">0.00 dB/oct</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Inter-Bin Phase (IBPC)</span>
+          <span id="metric-ibpc" class="kpi-value" aria-live="polite">0.00 rad</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Residual Kurtosis (κ)</span>
+          <span id="metric-kurt" class="kpi-value" aria-live="polite">0.00</span>
+        </div>
+        <div class="kpi-row">
+          <span class="kpi-label">Formants (F1 / F2)</span>
+          <span id="metric-formants" class="kpi-value" aria-live="polite">-- / -- Hz</span>
+        </div>
+      </div>
+    </aside>
+
+    <section class="visualizer-container" aria-label="Spectral Visualizer Section">
+      <div class="card visualizer-card">
+        <div class="visualizer-header">
+          <h2 class="card-title">Real-Time Spectral Decomposition (0 – 8 kHz)</h2>
+          <span id="metric-fps" class="badge badge-fps" aria-live="polite">60 FPS</span>
+        </div>
+        <div class="canvas-viewport" id="viewport">
+          <canvas id="spectral-canvas" aria-label="Real-time spectral waterfall audio visualizer"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

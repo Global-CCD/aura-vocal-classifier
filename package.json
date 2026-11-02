@@ -1,0 +1,19 @@
+{
+  "name": "vocal-classifier-spa",
+  "version": "2.1.0",
+  "description": "Production client-side vocal activity and synthetic vocal artifact classifier.",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -p 8787 --cors",
+    "test": "node tests/audit-verification-harness.js"
+  },
+  "keywords": [
+    "dsp",
+    "audio-worklet",
+    "onnx-runtime",
+    "vad",
+    "cloudflare-pages"
+  ],
+  "author": "Principal Systems Architect",
+  "license": "Apache-2.0"
+}
